@@ -13,7 +13,7 @@ def Login_page():
                 if cursor.fetchone():
                     st.write('Welcome admin')
                     while True:
-                        if st.button("Add User", key='add_user'):
+                        if st.button("Add User", key='make_user'):
                             st.write('Add a user')
                             with sqlite3.connect('test.db') as conn:
                                 id = random.randint(1, 999999)
