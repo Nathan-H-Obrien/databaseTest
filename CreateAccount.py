@@ -19,7 +19,9 @@ def Create_account_page():
             created_at = datetime.now()
             created_at = created_at.strftime('%Y-%m-%d %H:%M:%S')
             if st.button('Create account', key='create_account'):
+                st.write('Account created successfully')
                 with sqlite3.connect('test.db') as conn:
                     conn.execute('INSERT INTO users (id, username, email, password, created_at) VALUES (?, ?, ?, ?, ?)', 
                     (id, username, email, password, created_at))
                     conn.commit()
+            
