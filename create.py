@@ -28,9 +28,6 @@ try:
 except sqlite3.Error as e:
     pass
 
-conn = st.connection('test2.db', type='sqlite3')
-cursor = conn.cursor()
-
 
 st.button('Create an account')
 st.button('Login')
