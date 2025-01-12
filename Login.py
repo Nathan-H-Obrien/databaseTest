@@ -13,7 +13,7 @@ def Login_page():
                 if cursor.fetchone():
                     st.write('Welcome admin')
                     while True:
-                        if st.button("Add User"):
+                        if st.button("Add User", key='add_user'):
                             st.write('Add a user')
                             with sqlite3.connect('test.db') as conn:
                                 id = random.randint(1, 999999)
@@ -27,7 +27,7 @@ def Login_page():
                                 password = st.text_input('Password: ', type='password')
                                 created_at = datetime.now()
                                 created_at = created_at.strftime('%Y-%m-%d %H:%M:%S')
-                                if st.button('Make User'):
+                                if st.button('Create account', key='add_user'):
                                     with sqlite3.connect('test.db') as conn:
                                         conn.execute('INSERT INTO users (id, username, email, password, created_at) VALUES (?, ?, ?, ?, ?)', 
                                         (id, username, email, password, created_at))
