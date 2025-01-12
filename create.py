@@ -32,7 +32,7 @@ except sqlite3.Error as e:
 st.button('Create an account')
 st.button('Login')
 
-if st.button('Create an account'):
+""" if st.button('Create an account'):
     st.write('Create an account')
     st.write('Enter your details')
     with sqlite3.connect('test.db') as conn:
@@ -119,4 +119,4 @@ if st.button('Login'):
                 print('Invalid username or password')
                 exit()
 
-conn.close()
+conn.close() """
