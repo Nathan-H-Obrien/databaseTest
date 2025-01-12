@@ -34,12 +34,9 @@ def Login_page():
                                         (id, username, email, password, created_at))
                                         conn.commit()
                         if st.button("View Users", key='view_users'):
-                            try:
                                 with sqlite3.connect('test.db') as conn:
                                     for row in conn.execute('SELECT * FROM users'):
                                         st.write(row)
-                            except sqlite3.Error as e:
-                                st.write('No users found')
                         
                         if st.button("logout", key='exit'):
                             break
