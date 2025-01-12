@@ -41,9 +41,6 @@ def Login_page():
                         if st.button("logout", key='exit'):
                             break
                 elif cursor2.fetchone():
-                    cursor = conn.execute('SELECT * FROM users WHERE email = ? AND password = ?', (email, password))
-                    cursor.fetchone()
-                    if cursor.fetchone():
                         st.write('Welcome user')
                         while True:
                             if st.button('View profile', key='view_profile'):
