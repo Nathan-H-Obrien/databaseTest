@@ -17,11 +17,8 @@ def Login_page():
                             st.write('Add a user')
                             with sqlite3.connect('test.db') as conn:
                                 id = random.randint(1, 999999)
-                                try:
-                                    while conn.execute('SELECT * FROM users WHERE id = ?', (id,)).fetchone():
-                                        id = random.randint(1, 999999)
-                                except sqlite3.Error:
-                                    pass
+                                while conn.execute('SELECT * FROM users WHERE id = ?', (id,)).fetchone():
+                                    id = random.randint(1, 999999)
                                 username = st.text_input('Name: ')
                                 email = st.text_input('Email: ')
                                 password = st.text_input('Password: ', type='password')
