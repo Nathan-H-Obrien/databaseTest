@@ -10,6 +10,7 @@ def Login_page():
     if st.button('Login', key='login'):
             with sqlite3.connect('test.db') as conn:
                 cursor = conn.execute('SELECT * FROM admin WHERE email = ? AND password = ?', (email, password))
+                cursor2 = conn.execute('SELECT * FROM users WHERE email = ? AND password = ?', (email, password))
                 if cursor.fetchone():
                     st.write('Welcome admin')
                     while True:
@@ -42,7 +43,7 @@ def Login_page():
                         
                         if st.button("logout", key='exit'):
                             break
-                elif cursor.fetchone() is None:
+                elif cursor2.fetchone():
                     cursor = conn.execute('SELECT * FROM users WHERE email = ? AND password = ?', (email, password))
                     cursor.fetchone()
                     if cursor.fetchone():
