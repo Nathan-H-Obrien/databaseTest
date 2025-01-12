@@ -44,7 +44,7 @@ for page_name in pages:
     if st.sidebar.button(page_name):
         st.session_state.page = page_name
 
-pages[st.session_state.page]()
+#pages[st.session_state.page]()
 
 
 conn.close()
