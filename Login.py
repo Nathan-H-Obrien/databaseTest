@@ -37,7 +37,7 @@ def Login_page():
                             try:
                                 with sqlite3.connect('test.db') as conn:
                                     for row in conn.execute('SELECT * FROM users'):
-                                        print(row)
+                                        st.write(row)
                             except sqlite3.Error as e:
                                 st.write('No users found')
                         
