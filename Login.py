@@ -45,7 +45,7 @@ def Login_page():
                                 with sqlite3.connect('test.db') as conn:
                                     cursor = conn.execute('SELECT * FROM users WHERE email = ?', (email,))
                                     for row in cursor:
-                                        print(row)
+                                        st.write(row)
                         if st.button('Logout', key='logout_user'):
                             exit()
                 else:
