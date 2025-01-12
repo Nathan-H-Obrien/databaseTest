@@ -44,9 +44,9 @@ if st.button('Create an account'):
                 id = random.randint(1, 999999)
         except sqlite3.Error as e:
             pass
-        username = input('Enter name: ')
-        email = input('Enter email: ')
-        password = maskpass.askpass(mask='*')
+        username = st.text_input('Enter name: ')
+        email = st.text_input('Enter email: ')
+        password = st.text_input('Enter password: ', type='password')
         created_at = datetime.now()
         created_at = created_at.strftime('%Y-%m-%d %H:%M:%S')
         with sqlite3.connect('test.db') as conn:
