@@ -7,62 +7,55 @@ def Login_page():
     st.title('Login')
     email = st.text_input('Email:')
     password = st.text_input('Password:', type='password')
-    st.button('Login')
     if st.button('Login'):
             with sqlite3.connect('test.db') as conn:
                 cursor = conn.execute('SELECT * FROM admin WHERE email = ? AND password = ?', (email, password))
                 if cursor.fetchone():
-                    print('Welcome admin')
+                    st.write('Welcome admin')
                     while True:
-                        print('1. Add user')
-                        print('2. List users')
-                        print('3. Exit')
-                        choice = input('Enter your choice: ')
-                        if choice == '1':
+                        if st.button("Add User"):
                             st.write('Create an account')
                             with sqlite3.connect('test.db') as conn:
                                 id = random.randint(1, 999999)
                                 try:
                                     while conn.execute('SELECT * FROM users WHERE id = ?', (id,)).fetchone():
                                         id = random.randint(1, 999999)
-                                except sqlite3.Error as e:
+                                except sqlite3.Error:
                                     pass
                                 username = st.text_input('Name: ')
                                 email = st.text_input('Email: ')
                                 password = st.text_input('Password: ', type='password')
                                 created_at = datetime.now()
                                 created_at = created_at.strftime('%Y-%m-%d %H:%M:%S')
-                                st.button('Create account')
                                 if st.button('Create account'):
                                     with sqlite3.connect('test.db') as conn:
                                         conn.execute('INSERT INTO users (id, username, email, password, created_at) VALUES (?, ?, ?, ?, ?)', 
                                         (id, username, email, password, created_at))
                                         conn.commit()
-                        elif choice == '2':
+                        if st.button("View Users"):
                             try:
                                 with sqlite3.connect('test.db') as conn:
                                     for row in conn.execute('SELECT * FROM users'):
                                         print(row)
                             except sqlite3.Error as e:
                                 print("No users found")
-                        elif choice == '3':
+                        if st.button("Exit"):
                             exit()
                 elif cursor.fetchone() is None:
                     cursor = conn.execute('SELECT * FROM users WHERE email = ? AND password = ?', (email, password))
-                    user = True if cursor.fetchone() else False
+                    cursor.fetchone()
                     if cursor.fetchone():
-                        print('Welcome user')
+                        st.write('Welcome user')
                         while True:
                             print('1. View profile')
                             print('2. Exit')
                             choice = input('Enter your choice: ')
-                            if choice == '1':
+                            if st.button('View profile'):
                                 with sqlite3.connect('test.db') as conn:
                                     cursor = conn.execute('SELECT * FROM users WHERE email = ?', (email,))
                                     for row in cursor:
                                         print(row)
-                            elif choice == '2':
+                            if st.button('Exit'):
                                 exit()
                 else:
-                    print('Invalid username or password')
-                    exit()
+                    st.write('Invalid username or password')
