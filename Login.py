@@ -14,7 +14,7 @@ def Login_page():
                 if cursor.fetchone():
                     st.write('Welcome admin')
                     while True:
-                        if st.button("Add User", key='add_user'):
+                        if st.button("Add User", key='add_user_admin'):
                             st.write('Add a user')
                             with sqlite3.connect('test.db') as conn:
                                 id = random.randint(1, 999999)
@@ -33,22 +33,22 @@ def Login_page():
                                         conn.execute('INSERT INTO users (id, username, email, password, created_at) VALUES (?, ?, ?, ?, ?)', 
                                         (id, username, email, password, created_at))
                                         conn.commit()
-                        if st.button("View Users", key='view_users'):
+                        if st.button("View Users", key='view_users_admin'):
                                 with sqlite3.connect('test.db') as conn:
                                     for row in conn.execute('SELECT * FROM users'):
                                         st.write(row)
                         
-                        if st.button("logout", key='logout_admin'):
+                        if st.button("Logout", key='logout_admin'):
                             break
                 elif cursor2.fetchone():
                         st.write('Welcome user')
                         while True:
-                            if st.button('View profile', key='view_profile'):
+                            if st.button('View profile', key='view_user_profile'):
                                 with sqlite3.connect('test.db') as conn:
                                     cursor = conn.execute('SELECT * FROM users WHERE email = ?', (email,))
                                     for row in cursor:
                                         print(row)
-                            if st.button('logout', key='logout_user'):
+                            if st.button('Logout', key='logout_user'):
                                 break
                 else:
                     st.write('Invalid username or password')
