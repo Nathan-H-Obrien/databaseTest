@@ -7,7 +7,7 @@ def Login_page():
     st.title('Login')
     email = st.text_input('Email:')
     password = st.text_input('Password:', type='password')
-    if st.button('Login'):
+    if st.button('Login', key='login'):
             with sqlite3.connect('test.db') as conn:
                 cursor = conn.execute('SELECT * FROM admin WHERE email = ? AND password = ?', (email, password))
                 if cursor.fetchone():
