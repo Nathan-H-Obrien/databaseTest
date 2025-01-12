@@ -18,7 +18,7 @@ def Create_account_page():
             password = st.text_input('Password: ', type='password')
             created_at = datetime.now()
             created_at = created_at.strftime('%Y-%m-%d %H:%M:%S')
-            if st.button('Create account'):
+            if st.button('Create account', key='create_account'):
                 with sqlite3.connect('test.db') as conn:
                     conn.execute('INSERT INTO users (id, username, email, password, created_at) VALUES (?, ?, ?, ?, ?)', 
                     (id, username, email, password, created_at))
