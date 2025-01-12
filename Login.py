@@ -14,7 +14,7 @@ def Login_page():
                     st.write('Welcome admin')
                     while True:
                         if st.button("Add User"):
-                            st.write('Create an account')
+                            st.write('Add a user')
                             with sqlite3.connect('test.db') as conn:
                                 id = random.randint(1, 999999)
                                 try:
@@ -27,7 +27,7 @@ def Login_page():
                                 password = st.text_input('Password: ', type='password')
                                 created_at = datetime.now()
                                 created_at = created_at.strftime('%Y-%m-%d %H:%M:%S')
-                                if st.button('Create account'):
+                                if st.button('Make User'):
                                     with sqlite3.connect('test.db') as conn:
                                         conn.execute('INSERT INTO users (id, username, email, password, created_at) VALUES (?, ?, ?, ?, ?)', 
                                         (id, username, email, password, created_at))
@@ -38,7 +38,7 @@ def Login_page():
                                     for row in conn.execute('SELECT * FROM users'):
                                         print(row)
                             except sqlite3.Error as e:
-                                print("No users found")
+                                st.write('No users found')
                         if st.button("Exit"):
                             exit()
                 elif cursor.fetchone() is None:
@@ -47,9 +47,6 @@ def Login_page():
                     if cursor.fetchone():
                         st.write('Welcome user')
                         while True:
-                            print('1. View profile')
-                            print('2. Exit')
-                            choice = input('Enter your choice: ')
                             if st.button('View profile'):
                                 with sqlite3.connect('test.db') as conn:
                                     cursor = conn.execute('SELECT * FROM users WHERE email = ?', (email,))
