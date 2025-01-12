@@ -36,14 +36,14 @@ def Login_page():
                         
                     if st.button("Logout", key='logout_admin'):
                         exit()
-                elif cursor2.fetchone():
-                        st.write('Welcome user')
-                        if st.button('View profile', key='view_user_profile'):
-                                with sqlite3.connect('test.db') as conn:
-                                    cursor = conn.execute('SELECT * FROM users WHERE email = ?', (email,))
-                                    for row in cursor:
-                                        st.write(row)
-                        if st.button('Logout', key='logout_user'):
-                            exit()
-                else:
-                    st.write('Invalid username or password')
+    elif cursor2.fetchone():
+        st.write('Welcome user')
+        if st.button('View profile', key='view_user_profile'):
+            with sqlite3.connect('test.db') as conn:
+                cursor = conn.execute('SELECT * FROM users WHERE email = ?', (email,))
+                for row in cursor:
+                    st.write(row)
+        if st.button('Logout', key='logout_user'):
+            exit()
+    else:
+        st.write('Invalid username or password')
