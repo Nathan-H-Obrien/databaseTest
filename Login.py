@@ -43,7 +43,7 @@ def Login_page():
                         cursor = conn.execute('SELECT * FROM users WHERE email = ?', (email,))
                         for row in cursor:
                             st.write(row)
-        if st.button('Logout', key='logout_user'):
-            exit()
-    else:
-        st.write('Invalid username or password')
+                if st.button('Logout', key='logout_user'):
+                    exit()
+            else:
+                st.write('Invalid username or password')
