@@ -5,7 +5,7 @@ import streamlit as st
 from Login import Login_page
 from CreateAccount import Create_account_page
 
-conn = st.connection('test.db', type='sqlite')
+conn = st.connection('test.db', type='sql')
 
 try:
     with conn.session as conn:
