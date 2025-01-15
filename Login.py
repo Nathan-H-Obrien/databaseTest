@@ -13,7 +13,8 @@ def Login_page():
             cursor2 = conn.execute('SELECT * FROM users WHERE email = ? AND password = ?', (email, password))
             if cursor.fetchone():
                 st.write('Welcome admin')
-                if st.button("Add User", key='add_user_admin'):
+                option = st.selectbox('Select an option', ['Add User', 'View Users', 'Logout'])
+                if option == 'Add User':
                     st.write('Add a user')
                     with sqlite3.connect('test.db') as conn:
                         id = random.randint(1, 999999)
@@ -29,12 +30,11 @@ def Login_page():
                                 conn.execute('INSERT INTO users (id, username, email, password, created_at) VALUES (?, ?, ?, ?, ?)', 
                                 (id, username, email, password, created_at))
                                 conn.commit()
-                    if st.button("View Users", key='view_users_admin'):
+                    if option == 'View Users':
                         with sqlite3.connect('test.db') as conn:
                             for row in conn.execute('SELECT * FROM users'):
                                 st.write(row)
-                        
-                    if st.button("Logout", key='logout_admin'):
+                    if option == 'Logout':
                         exit()
             elif cursor2.fetchone():
                 st.write('Welcome user')
