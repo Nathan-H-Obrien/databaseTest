@@ -6,7 +6,6 @@ from datetime import datetime
 def Create_account_page():
     st.title('Create an account')
     st.write('Enter your details')
-    conn = st.connection('test.db', type='sql')
     with sqlite3.connect('test.db') as conn:
             id = random.randint(1, 999999)
             try:
