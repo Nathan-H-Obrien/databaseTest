@@ -5,9 +5,10 @@ import streamlit as st
 from Login import Login_page
 from CreateAccount import Create_account_page
 
+conn = st.connection('test_db', type='sql')
 
 try:
-    with sqlite3.connect('test2.db') as conn:
+    with conn.session as conn:
         conn.execute('''
             CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY,
@@ -18,7 +19,7 @@ try:
             )
         ''')
 
-    with sqlite3.connect('test2.db') as conn:
+    with conn.session as conn:
         conn.execute('''
             CREATE TABLE IF NOT EXISTS admin (
             id INTEGER PRIMARY KEY,

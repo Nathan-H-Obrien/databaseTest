@@ -6,7 +6,8 @@ from datetime import datetime
 def Create_account_page():
     st.title('Create an account')
     st.write('Enter your details')
-    with sqlite3.connect('test.db') as conn:
+    conn = st.connection('test_db', type='sql')
+    with conn.session as conn:
             id = random.randint(1, 999999)
             try:
                 while conn.execute('SELECT * FROM users WHERE id = ?', (id,)).fetchone():
