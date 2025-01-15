@@ -8,7 +8,7 @@ from CreateAccount import Create_account_page
 conn = st.connection('test.db', type='sql')
 
 try:
-    with conn.session as conn:
+    with sqlite3.connect('test.db') as conn:
         conn.execute('''
             CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY,
@@ -19,7 +19,7 @@ try:
             )
         ''')
 
-    with conn.session as conn:
+    with sqlite3.connect('test.db') as conn:
         conn.execute('''
             CREATE TABLE IF NOT EXISTS admin (
             id INTEGER PRIMARY KEY,
